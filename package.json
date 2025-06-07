@@ -1,0 +1,12 @@
+{
+  "name": "trip-diary",
+  "version": "1.0.0",
+  "author": "Dev-KimDonghyun",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dev-KimDonghyun/Trip-Diary.git"
+  },
+  "homepage": "",
+  "description": "Full-Stack Trip Diary Web Application"
+}
