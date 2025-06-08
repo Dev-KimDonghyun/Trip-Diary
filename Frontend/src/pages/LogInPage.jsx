@@ -1,15 +1,17 @@
+import axios from "axios";
+
 const LogInPage = () => {
-  const logInSubmitLogic = (e) => {
+  const logInSubmitLogic = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const userId = formData.get("userId");
-    const userPW = formData.get("userPw");
+    const userPw = formData.get("userPw");
 
-    if (!userId || !userPW) {
+    if (!userId || !userPw) {
       if (!userId) {
         console.log("Enter a User ID");
         alert("Enter a User ID");
-      } else if (!userPW) {
+      } else if (!userPw) {
         console.log("Enter a User PW");
         alert("Enter a User PW");
       } else {
@@ -17,7 +19,26 @@ const LogInPage = () => {
         alert("Enter User ID and PW");
       }
     } else {
-      // LogIn JavaScript Logic
+      try {
+        const res = await axios.post("API", {
+          userId,
+          userPw,
+        });
+
+        const { token } = res.data;
+        localStorage.setItem("TripDiaryLoginToken", token);
+        console.log("Success LogIn");
+
+        // Add Logic After LogIn
+      } catch (err) {
+        if (err.response) {
+          alert(err.response.data.message || "Fail LogIn");
+        } else {
+          console.log("Fail to Connect Server");
+          alert("Fail to Connect Server");
+        }
+        console.error(err);
+      }
     }
   };
   return (
@@ -41,6 +62,7 @@ const LogInPage = () => {
 
           <button type="submit">Log In</button>
           <button
+            type="button"
             onClick={() => [
               // Route To Sign Up Page
             ]}
