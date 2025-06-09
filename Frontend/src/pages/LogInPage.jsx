@@ -4,6 +4,12 @@ import axios from "axios";
 const LogInPage = () => {
   const navigate = useNavigate();
 
+  const notYetSupport = () => {
+    alert(
+      "Sorry, The Find ID/PW service is not yet supported.\nPlease contact admin."
+    );
+  };
+
   const logInSubmitLogic = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -57,7 +63,7 @@ const LogInPage = () => {
           <div>
             <label
               onClick={() => {
-                // Route To Find ID/PW Page
+                notYetSupport();
               }}
             >
               Find ID/PW
@@ -65,7 +71,12 @@ const LogInPage = () => {
           </div>
 
           <button type="submit">Log In</button>
-          <button type="button" onClick={() => navigate("/signUp")}>
+          <button
+            type="button"
+            onClick={() => {
+              navigate("/signUp");
+            }}
+          >
             Sign Up
           </button>
         </form>
