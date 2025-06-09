@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LogInPage = () => {
+  const navigate = useNavigate();
+
   const logInSubmitLogic = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -41,6 +44,7 @@ const LogInPage = () => {
       }
     }
   };
+
   return (
     <div>
       <div>
@@ -61,12 +65,7 @@ const LogInPage = () => {
           </div>
 
           <button type="submit">Log In</button>
-          <button
-            type="button"
-            onClick={() => [
-              // Route To Sign Up Page
-            ]}
-          >
+          <button type="button" onClick={() => navigate("/signUp")}>
             Sign Up
           </button>
         </form>
