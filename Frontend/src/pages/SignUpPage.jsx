@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
   const SignUpPageFormList = [
     {
       id: "userNickName",
@@ -20,10 +24,39 @@ const SignUpPage = () => {
     },
   ];
 
+  const signUpSubmitLogic = async (e) => {
+    e.preventDefault();
+    const signUpFormData = new FormData(e.currentTarget);
+    const inputNickName = signUpFormData.get("userNickName");
+    const inputUserId = signUpFormData.get("createUserId");
+    const inputUserPw = signUpFormData.get("createUserPw");
+
+    try {
+      await axios.post("API", {
+        inputNickName,
+        inputUserId,
+        inputUserPw,
+      });
+
+      const suc = "Succeeded for Sign Up";
+      console.log(suc);
+      alert(suc);
+      navigate("/");
+    } catch (err) {
+      if (err.response) {
+        console.log(err.response.data.message);
+        alert("Fail to Sign Up");
+      } else {
+        console.log("Fail to Connect Server");
+        alert("Fail to Connect Server");
+      }
+      console.error(err);
+    }
+  };
   return (
     <div>
       <div>
-        <form>
+        <form onSubmit={signUpSubmitLogic}>
           {SignUpPageFormList.map((list) => (
             <div key={list.id}>
               <label htmlFor={list.id}>{list.title}</label>
