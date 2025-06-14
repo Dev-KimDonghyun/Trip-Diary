@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/signUpModel");
 
-router.post("/api/signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
   const { nickName, userId, userPw } = req.body;
 
   if (!nickName || !userId || !userPw) {
@@ -29,3 +29,5 @@ router.post("/api/signup", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+module.exports = router;
