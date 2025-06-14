@@ -2,10 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const signUpLogic = require('./routes/signUpLogic');
+const signUpLogic = require("./routes/signUpLogic");
 
 const app = express();
-const port = 5000;
+const port = 5050;
 
 dotenv.config();
 
@@ -14,7 +14,6 @@ const MONGOURI = process.env.MONGO_URI;
 app.use(express.json());
 
 app.use("/api", signUpLogic);
-
 
 const CheckMongoConnect = async () => {
   try {
@@ -26,3 +25,7 @@ const CheckMongoConnect = async () => {
 };
 
 CheckMongoConnect();
+
+app.listen(port, () => {
+  console.log("Server is Running");
+});
