@@ -27,15 +27,15 @@ const SignUpPage = () => {
   const signUpSubmitLogic = async (e) => {
     e.preventDefault();
     const signUpFormData = new FormData(e.currentTarget);
-    const inputNickName = signUpFormData.get("userNickName");
-    const inputUserId = signUpFormData.get("createUserId");
-    const inputUserPw = signUpFormData.get("createUserPw");
+    const nickName = signUpFormData.get("userNickName");
+    const userId = signUpFormData.get("createUserId");
+    const userPw = signUpFormData.get("createUserPw");
 
     try {
       await axios.post("API", {
-        inputNickName,
-        inputUserId,
-        inputUserPw,
+        nickName,
+        userId,
+        userPw,
       });
 
       const suc = "Succeeded for Sign Up";
