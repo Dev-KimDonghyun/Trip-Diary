@@ -32,7 +32,7 @@ const SignUpPage = () => {
     const userPw = signUpFormData.get("createUserPw");
 
     try {
-      await axios.post("http://localhost:5000/api/signup", {
+      await axios.post("http://localhost:5050/api/signup", {
         nickName,
         userId,
         userPw,
