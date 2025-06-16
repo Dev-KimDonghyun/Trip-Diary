@@ -45,7 +45,19 @@
 - **/trip/new** - 여행 페이지 생성 화면 표시
 - **/trip/:id** - 개별 여행 페이지 표시
 
-## 6. 개발 계획
+## 6. API 엔드포인트 설계
+
+- [POST] /api/signup - 회원가입
+- [POST] /api/login - 로그인
+- [GET] /api/userInfo - 회원정보
+- [POST] /api/logout - 로그아웃
+- [POST] /api/makeDiary - 기록 생성
+- [GET] /api/searchDiary - 전체 기록 조회
+- [GET] /api/diary:id - 특정 기록 조회
+- [PUT] /api/diary:id - 특정 기록 수정
+- [DELETE] /api/diary:id - 특정 기록 삭제
+
+## 7. 개발 계획
 
 1. 환경 세팅, 폴더 구조 정리
 2. 회원가입/로그인 기능 구현
@@ -53,33 +65,6 @@
 4. Redux 적용
 5. UI 구성
 6. 최종 점검
-
-## 7. MongoDB Schema 데이터 구조 설계
-
-```javascript
-
-// User Schema
-{
-    _id: ObjectId,
-    email: String,
-    password: String,
-    createdAt: Date,
-}
-
-// Trip Schema
-{
-    userId: ObjectId,
-    pageId: String
-    title: String,
-	location: String,
-	startDate: Date,
-	endDate: Date,
-    content: String,
-    createdAt: Date,
-    updatedAt: Date,
-}
-
-```
 
 ## 8. 여담
 

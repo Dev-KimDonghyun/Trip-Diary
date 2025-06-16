@@ -45,7 +45,20 @@
 - **/trip/new** - 旅行ページ作成画面表示
 - **/trip/:id** - 個別旅行ページ表示
 
-## 6. 開発計画
+## 6. APIエンドポイント設計
+
+- [POST] /api/signup - ユーザー登録
+- [POST] /api/login - ログイン
+- [GET] /api/userInfo - ユーザー情報の取得
+- [POST] /api/logout - ログアウト
+- [POST] /api/makeDiary - 記録の作成
+- [GET] /api/searchDiary - 記録の一覧取得
+- [GET] /api/diary:id - 特定の記録の取得
+- [PUT] /api/diary:id - 特定の記録の編集
+- [DELETE] /api/diary:id - 特定の記録の削除
+
+
+## 7. 開発計画
 
 1. 環境設定、フォルダ構造の整理
 2. 会員登録/ログイン機能の実装
@@ -53,33 +66,6 @@
 4. Redux適用
 5. UI構成
 6. 最終点検
-
-## 7. MongoDB Schemaデータ構造設計
-
-```javascript
-
-// User Schema
-{
-    _id: ObjectId,
-    email: String,
-    password: String,
-    createdAt: Date,
-}
-
-// Trip Schema
-{
-    userId: ObjectId,
-    pageId: String
-    title: String,
-	location: String,
-	startDate: Date,
-	endDate: Date,
-    content: String,
-    createdAt: Date,
-    updatedAt: Date,
-}
-
-```
 
 ## 8. 余談
 
