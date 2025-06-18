@@ -11,13 +11,13 @@ router.post("/login", async (req, res) => {
     const searchUser = await User.findOne({ userId });
 
     if (!searchUser) {
-      // Message
+      return res.status(404).json({ message: "User not found" });
     }
 
     const matchUserPw = await bcrypt.compare(userPw, searchUser.userPw);
 
     if (!matchUserPw) {
-      // Message
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     // Issuing and Delivering JWT Token
