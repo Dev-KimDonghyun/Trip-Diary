@@ -1,11 +1,9 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const router = express.Router();
-const logInUser = require("../models/logInModel");
+const User = require("../models/UserModel");
 
 router.post("/login", async (req, res) => {
-  const { userId, userPw } = req.body;
+  const { userId } = req.body;
 
   try {
     const searchUser = await User.findOne({ userId });
@@ -13,18 +11,6 @@ router.post("/login", async (req, res) => {
     if (!searchUser) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    const matchUserPw = await bcrypt.compare(userPw, searchUser.userPw);
-
-    if (!matchUserPw) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-
-    const token = jwt.sign(
-      { userId: logInUser.userId },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
 
     res.status(200).json({ message: "Login successful", token });
   } catch (err) {

@@ -1,12 +1,11 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const router = express.Router();
-const User = require("../models/signUpModel");
+const User = require("../models/UserModel");
 
-router.post("/signup", async (req, res) => {
-  const { nickName, userId, userPw } = req.body;
+router.post("/createId", async (req, res) => {
+  const { nickName, userId } = req.body;
 
-  if (!nickName || !userId || !userPw) {
+  if (!nickName || !userId) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -17,10 +16,7 @@ router.post("/signup", async (req, res) => {
       return res.status(409).json({ message: "User ID already exists" });
     }
 
-    const salt = await bcrypt.genSalt(10);
-
-    const hashedPw = await bcrypt.hash(userPw, salt);
-    const newUser = new User({ nickName, userId, userPw: hashedPw });
+    const newUser = new User({ nickName, userId });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully" });

@@ -5,4 +5,4 @@ const userSchema = new mongoose.Schema({
     userId: { type: String, require: true, uniqe: true },
 });
 
-module.exports = mongoose.model("createUser", userSchema);
+module.exports = mongoose.model("User", userSchema);
