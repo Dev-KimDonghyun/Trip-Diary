@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const signUpLogic = require("./routes/signUpLogic");
+const logInLogic = require("./routes/logInLogic");
 
 const app = express();
 const port = 5050;
@@ -14,6 +15,8 @@ const MONGOURI = process.env.MONGO_URI;
 app.use(express.json());
 
 app.use("/api", signUpLogic);
+
+app.use("/api", logInLogic);
 
 const CheckMongoConnect = async () => {
   try {
