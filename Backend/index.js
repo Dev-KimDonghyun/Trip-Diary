@@ -1,8 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const dotenv = require("dotenv");
-const signUpLogic = require("./routes/signUpLogic");
+const createIdLogic = require("./routes/createIdLogic");
 const logInLogic = require("./routes/logInLogic");
 
 const app = express();
@@ -14,7 +13,7 @@ const MONGOURI = process.env.MONGO_URI;
 
 app.use(express.json());
 
-app.use("/api", signUpLogic);
+app.use("/api", createIdLogic);
 
 app.use("/api", logInLogic);
 
