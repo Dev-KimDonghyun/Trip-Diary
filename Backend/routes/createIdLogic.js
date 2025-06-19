@@ -19,7 +19,14 @@ router.post("/createId", async (req, res) => {
     const newUser = new User({ nickName, userId });
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        _id: newUser._id,
+        userId: newUser.userId,
+        nickName: newUser.nickName,
+      },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
