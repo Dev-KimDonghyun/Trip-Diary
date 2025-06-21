@@ -5,7 +5,7 @@ const diarySchema = new mongoose.Schema({
     location: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    ontent: { type: String, required: true },
+    content: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
 });
 

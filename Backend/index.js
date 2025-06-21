@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const createIdLogic = require("./routes/createIdLogic");
 const logInLogic = require("./routes/logInLogic");
+const makeDiaryLogic = require("./routes/makeDiaryLogic");
 
 const app = express();
 const port = 5050;
@@ -14,8 +15,8 @@ const MONGOURI = process.env.MONGO_URI;
 app.use(express.json());
 
 app.use("/api", createIdLogic);
-
 app.use("/api", logInLogic);
+app.use("/api", makeDiaryLogic);
 
 const CheckMongoConnect = async () => {
   try {
