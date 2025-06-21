@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const createIdLogic = require("./routes/createIdLogic");
 const logInLogic = require("./routes/logInLogic");
 const makeDiaryLogic = require("./routes/makeDiaryLogic");
+const userInfoLogic = require("./routes/userInfoLogic");
+const showAllDiaryLogic = require("./routes/showAllDiaryLogic");
 
 const app = express();
 const port = 5050;
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use("/api", createIdLogic);
 app.use("/api", logInLogic);
 app.use("/api", makeDiaryLogic);
+app.use("/api", userInfoLogic);
+app.use("/api", showAllDiaryLogic);
 
 const CheckMongoConnect = async () => {
   try {
