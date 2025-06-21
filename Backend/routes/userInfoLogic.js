@@ -9,8 +9,8 @@ router.get("/userInfo", async (req, res) => {
 
     const user = await User.findOne({ userId });
 
-    const { ...nickname } = user.toObject();
-    res.status(200).json({ userId, nickname });
+    const { ...createdAt } = user.toObject();
+    res.status(200).json({ userId, nickname, createdAt });
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }

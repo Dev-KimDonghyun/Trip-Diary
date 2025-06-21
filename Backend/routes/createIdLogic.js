@@ -16,7 +16,7 @@ router.post("/createId", async (req, res) => {
       return res.status(409).json({ message: "User ID already exists" });
     }
 
-    const newUser = new User({ nickName, userId });
+    const newUser = new User({ nickName, userId, createdAt });
     await newUser.save();
 
     res.status(201).json({
