@@ -7,6 +7,7 @@ const makeDiaryLogic = require("./routes/makeDiaryLogic");
 const userInfoLogic = require("./routes/userInfoLogic");
 const showAllDiaryLogic = require("./routes/showAllDiaryLogic");
 const showDiary = require("./routes/showDiaryLogic");
+const reviseDiaryLogic = require("./routes/reviseDiaryLogic");
 
 const app = express();
 const port = 5050;
@@ -23,6 +24,7 @@ app.use("/api", makeDiaryLogic);
 app.use("/api", userInfoLogic);
 app.use("/api", showAllDiaryLogic);
 app.use("/api", showDiary);
+app.use("/api", reviseDiaryLogic);
 
 const CheckMongoConnect = async () => {
   try {
