@@ -1,6 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const DiaryPost = require("../models/diaryPostModel");
+
+const router = express.Router();
 
 router.post("/makeDiary", async (req, res) => {
   const { title, location, startDate, endDate, content } = req.body;

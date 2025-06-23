@@ -1,6 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const User = require("../models/UserModel");
+
+const router = express.Router();
 
 router.post("/login", async (req, res) => {
   const { userId } = req.body;
@@ -22,7 +23,7 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: "Server Error" });
   }
 });
 
