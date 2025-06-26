@@ -14,37 +14,33 @@ const LogInPage = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const userId = formData.get("userId");
-    const userPw = formData.get("userPw");
 
-    if (!userId || !userPw) {
-      if (!userId) {
-        console.log("Enter a User ID");
-        alert("Enter a User ID");
-      } else if (!userPw) {
-        console.log("Enter a User PW");
-        alert("Enter a User PW");
-      } else {
-        console.log("Enter User ID and PW");
-        alert("Enter User ID and PW");
-      }
+    if (!userId || userId.value.trim() === "") {
+      console.log("Enter a User ID");
+      alert("Enter a User ID");
     } else {
       try {
-        const res = await axios.post("API", {
-          userId,
-          userPw,
-        });
-
-        const { token } = res.data;
-        localStorage.setItem("TripDiaryLoginToken", token);
-        console.log("Success LogIn");
+        await axios
+          .post("API", {
+            userId,
+          })
+          .then((res) => {
+            const dataBaseIdentifyId = res.data.user._id;
+            const userNickname = res.data.user.nickname;
+          });
 
         // Add Logic After LogIn
       } catch (err) {
-        if (err.response) {
-          alert(err.response.data.message || "Fail LogIn");
-        } else {
-          console.log("Fail to Connect Server");
-          alert("Fail to Connect Server");
+        if (axios.isAxiosError(err) && err.response) {
+          const status = err.response.status;
+          const message = err.response.data.message;
+
+          if (status === 404) {
+            alert("This is a non existent user");
+          } else {
+            console.log("Fail to Connect Server");
+            alert("Fail to Connect Server");
+          }
         }
         console.error(err);
       }
@@ -57,16 +53,13 @@ const LogInPage = () => {
         <form onSubmit={logInSubmitLogic}>
           <label htmlFor="userId">User ID</label>
           <input id="userId" name="userId" type="text" />
-          <label htmlFor="userPw">User PW</label>
-          <input id="userPw" name="userPw" type="password" />
-
           <div>
             <label
               onClick={() => {
                 notYetSupport();
               }}
             >
-              Find ID/PW
+              Find ID
             </label>
           </div>
 
@@ -77,7 +70,7 @@ const LogInPage = () => {
               navigate("/signUp");
             }}
           >
-            Sign Up
+            Create ID
           </button>
         </form>
       </div>
