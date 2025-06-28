@@ -15,43 +15,46 @@ const SignUpPage = () => {
       type: "text",
       title: "ID",
       description: "Please enter your ID",
-    },
-    {
-      id: "createUserPw",
-      type: "password",
-      title: "Password",
-      description: "Please enter your password of at least 8 characters",
-    },
+    }
   ];
 
   const signUpSubmitLogic = async (e) => {
     e.preventDefault();
+
     const signUpFormData = new FormData(e.currentTarget);
     const nickName = signUpFormData.get("userNickName");
     const userId = signUpFormData.get("createUserId");
-    const userPw = signUpFormData.get("createUserPw");
 
-    try {
+    if ((!userId || userId.value.trim() === "")||(!nickName || nickName.value.trim() === "")) {
+
+      alert("Enter all firlds");
+
+    } else { 
+      try {
       await axios.post("http://localhost:5050/api/signup", {
         nickName,
         userId,
-        userPw,
       });
 
-      const suc = "Succeeded for Sign Up";
-      console.log(suc);
-      alert(suc);
+      alert("Succeeded for Create ID");
+
       navigate("/");
+
     } catch (err) {
-      if (err.response) {
-        console.log(err.response.data.message);
-        alert("Fail to Sign Up");
-      } else {
-        console.log("Fail to Connect Server");
-        alert("Fail to Connect Server");
-      }
+      if (axios.isAxiosError(err) && err.response) {
+          const status = err.response.status;
+
+          if (status === 400) {
+            alert("Enter all firlds");
+          } else if (status === 409) {
+            alert("User ID already exists");
+          } else {
+            alert("Fail to Connect Server");
+          }
+
+        }
       console.error(err);
-    }
+    } }
   };
   return (
     <div>
@@ -68,7 +71,7 @@ const SignUpPage = () => {
               />
             </div>
           ))}
-          <button type="submit">Sign </button>
+          <button type="submit">Create ID</button>
         </form>
       </div>
     </div>
@@ -76,3 +79,6 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+
+// 400 빈칸 있음
+// 409 동일 아이디 있음
