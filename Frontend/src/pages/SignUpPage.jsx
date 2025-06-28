@@ -15,7 +15,7 @@ const SignUpPage = () => {
       type: "text",
       title: "ID",
       description: "Please enter your ID",
-    }
+    },
   ];
 
   const signUpSubmitLogic = async (e) => {
@@ -25,23 +25,29 @@ const SignUpPage = () => {
     const nickName = signUpFormData.get("userNickName");
     const userId = signUpFormData.get("createUserId");
 
-    if ((!userId || userId.value.trim() === "")||(!nickName || nickName.value.trim() === "")) {
-
+    if (
+      !userId ||
+      userId.value.trim() === "" ||
+      !nickName ||
+      nickName.value.trim() === ""
+    ) {
       alert("Enter all firlds");
-
-    } else { 
+    } else {
       try {
-      await axios.post("http://localhost:5050/api/signup", {
-        nickName,
-        userId,
-      });
+        await axios
+          .post("http://localhost:5050/api/signup", {
+            nickName,
+            userId,
+          })
+          .then((res) => {
+            const dataBaseIdentifyId = res.data.user._id;
+          });
 
-      alert("Succeeded for Create ID");
+        alert("Succeeded for Create ID");
 
-      navigate("/");
-
-    } catch (err) {
-      if (axios.isAxiosError(err) && err.response) {
+        navigate("/");
+      } catch (err) {
+        if (axios.isAxiosError(err) && err.response) {
           const status = err.response.status;
 
           if (status === 400) {
@@ -51,10 +57,10 @@ const SignUpPage = () => {
           } else {
             alert("Fail to Connect Server");
           }
-
         }
-      console.error(err);
-    } }
+        console.error(err);
+      }
+    }
   };
   return (
     <div>
