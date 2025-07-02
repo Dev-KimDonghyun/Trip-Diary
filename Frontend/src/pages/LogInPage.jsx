@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LogInPage = () => {
   const navigate = useNavigate();
+
+  const [userId, setUserId] = useState("");
 
   const notYetSupport = () => {
     alert(
@@ -12,8 +15,6 @@ const LogInPage = () => {
 
   const logInSubmitLogic = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const userId = formData.get("userId");
 
     if (!userId || userId.value.trim() === "") {
       console.log("Enter a User ID");
@@ -38,7 +39,6 @@ const LogInPage = () => {
       } catch (err) {
         if (axios.isAxiosError(err) && err.response) {
           const status = err.response.status;
-          const message = err.response.data.message;
 
           if (status === 404) {
             alert("This is a non existent user");
@@ -56,8 +56,13 @@ const LogInPage = () => {
     <div>
       <div>
         <form onSubmit={logInSubmitLogic}>
-          <label htmlFor="userId">User ID</label>
-          <input id="userId" name="userId" type="text" />
+          <label>User ID</label>
+          <input
+            type="text"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+          />
+
           <div>
             <label
               onClick={() => {
