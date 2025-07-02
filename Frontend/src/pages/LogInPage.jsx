@@ -21,15 +21,20 @@ const LogInPage = () => {
     } else {
       try {
         await axios
-          .post("API", {
+          .post("http://localhost:5050/api/login", {
             userId,
           })
           .then((res) => {
             const dataBaseIdentifyId = res.data.user._id;
             const userNickname = res.data.user.nickname;
+
+            localStorage.setItem("tripDiaryUserNickname", userNickname);
+            localStorage.setItem("tripDiaryDataBaseId", dataBaseIdentifyId);
+
+            alert("Login Successed");
           });
 
-        // Add Logic After LogIn
+        navigate("/");
       } catch (err) {
         if (axios.isAxiosError(err) && err.response) {
           const status = err.response.status;
