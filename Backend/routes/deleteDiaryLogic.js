@@ -1,6 +1,6 @@
 const express = require("express");
 const DiaryPost = require("../models/diaryPostModel");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const router = express.Router();
 
