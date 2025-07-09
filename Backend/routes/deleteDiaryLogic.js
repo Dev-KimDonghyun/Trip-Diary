@@ -1,12 +1,17 @@
 const express = require("express");
 const DiaryPost = require("../models/diaryPostModel");
+const { default: mongoose } = require("mongoose");
 
 const router = express.Router();
 
 router.delete("/diary/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const diary = await DiaryPost.findById(id);
+    const { _id, userId } = req.params;
+
+    const diary = await DiaryPost.findOne({
+      _id: new mongoose.Types.ObjectId(String(_id)),
+      userId: new mongoose.Types.ObjectId(String(userId)),
+    });
 
     if (!diary) {
       return res.status(404).json({ message: "Page not found" });
